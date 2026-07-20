@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>AITCM · 智慧中醫 惠及全球</title>
+  <style>
+    /* ===== 全局重置与基础 ===== */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html, body {
+      background: #dce8d8;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
+      padding: 12px;
+    }
+    .aitcm-container {
+      width: 100%;
+      height: 100%;
+      max-height: 100vh;
+      background: #dce8d8;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ===== 顶部品牌区（20%） ===== */
+    .aitcm-header {
+      flex: 0 0 20%;
+      min-height: 20%;
+      max-height: 20%;
+      background: #dce8d8;
+      display: flex;
+      align-items: stretch;
+      justify-content: space-between;
+      padding: 0.5vh 0.5vw;
+      position: relative;
+    }
+    .brand-left {
+      flex: 0 0 30%;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 1vh 0.2vw;
+    }
+    .brand-left .cn {
+      font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+      color: #4A6B5A;
+      line-height: 1.6;
+      width: 100%;
+      font-size: clamp(18px, 3.0vw, 30px);
+      font-weight: 400;
+      white-space: normal;
+      word-break: break-word;
+      padding: 0.3vh 0;
+    }
+    .brand-left .cn:last-child { font-weight: 400; }
+    .brand-center {
+      flex: 0 0 40%;
+      min-width: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 0.5vw;
+    }
+    .brand-center svg {
+      height: 100%;
+      width: auto;
+      max-height: 100%;
+      display: block;
+      object-fit: contain;
+    }
+    .brand-right {
+      flex: 0 0 30%;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 1vh 0.2vw;
+    }
+    .brand-right .en {
+      font-family: 'Futura', 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+      color: #4A6B5A;
+      line-height: 1.6;
+      width: 100%;
+      font-size: clamp(16px, 3.0vw, 32px);
+      font-weight: 520;
+      white-space: normal;
+      word-break: break-word;
+      padding: 0.3vh 0;
+    }
+    .brand-right .en.sub {
+      font-weight: 400;
+      color: #7FCDCD;
+      font-size: clamp(16px, 2.8vw, 30px);
+      white-space: normal;
+      word-break: break-word;
+    }
+    .menu-toggle {
+      background: none;
+      border: none;
+      font-size: 28px;
+      color: #4A6B5A;
+      cursor: pointer;
+      padding: 0 8px;
+      display: none;
+      position: absolute;
+      right: 1vw;
+      top: 0.5vh;
+      z-index: 10;
+    }
+    @media (max-width: 768px) { .menu-toggle { display: block; } }
+
+    /* ===== 中间三栏（电脑端） ===== */
+    .middle-area {
+      flex: 1;
+      display: flex;
+      gap: 0;
+      overflow: hidden;
+      margin: 0.5vh 1vw 0;
+      border-radius: 16px 16px 0 0;
+      background: #f4f6f4;
+      min-height: 0;
+      position: relative;
+    }
+    .left-panel {
+      width: 240px;
+      background: #e8ede6;
+      padding: 10px 8px 8px;
+      overflow: hidden;
+      flex-shrink: 0;
+      border-right: 1px solid #d2ded1;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      z-index: 1;
+    }
+    .left-panel h4 {
+      font-size: 14px;
+      color: #2c4937;
+      margin-bottom: 8px;
+      border-bottom: 1px solid #bccfc4;
+      padding-bottom: 4px;
+      flex-shrink: 0;
+    }
+    .msg-list {
+      flex: 1;
+      overflow-y: auto;
+      padding-right: 4px;
+      margin-bottom: 6px;
+    }
+    .msg-item {
+      font-size: 13px;
+      color: #233428;
+      padding: 6px 0;
+      border-bottom: 1px dashed #d2ded1;
+    }
+    .msg-item .name { font-weight: 600; color: #2c4937; }
+    .msg-item .time { color: #6b7a6b; font-size: 11px; margin-left: 8px; }
+    .msg-item .content { margin-top: 2px; color: #3a4a3a; }
+    .guestbook-input-area {
+      display: flex;
+      gap: 6px;
+      padding: 6px 0 2px;
+      border-top: 1px solid #bccfc4;
+      flex-shrink: 0;
+    }
+    .guestbook-input-area input {
+      flex: 1;
+      padding: 6px 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 20px;
+      font-size: 13px;
+      outline: none;
+      background: #fafbfa;
+    }
+    .guestbook-input-area input:focus {
+      border-color: #7FCDCD;
+      background: #fff;
+    }
+    .guestbook-input-area button {
+      padding: 0 14px;
+      background: #4A6B5A;
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      font-size: 13px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .guestbook-input-area button:hover { background: #2c4937; }
+    .chat-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      background: #f4f6f4;
+      padding: 8px 6px;
+      overflow: hidden;
+    }
+    .chat-box {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding-bottom: 4px;
+    }
+    .chat-box .message {
+      max-width: 80%;
+      padding: 8px 14px;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      word-break: break-word;
+      animation: fadeIn 0.2s ease;
+    }
+    .chat-box .user-msg {
+      background: #4A6B5A;
+      color: #fff;
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+    .chat-box .ai-msg {
+      background: #eaefe3;
+      color: #233428;
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+      border: 1px solid #d2ded1;
+    }
+    .chat-box .ai-msg.error {
+      background: #fde8e8;
+      border-color: #f5c2c2;
+      color: #a13d3d;
+    }
+    .chat-box .typing-dots {
+      display: inline-flex;
+      gap: 4px;
+      align-items: center;
+      padding: 6px 0;
+    }
+    .chat-box .typing-dots span {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: #6b7a6b;
+      border-radius: 50%;
+      animation: dotBounce 1.2s infinite ease-in-out;
+    }
+    .chat-box .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .chat-box .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes dotBounce {
+      0%,80%,100% { transform: scale(0.6); opacity: 0.4; }
+      40% { transform: scale(1); opacity: 1; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .right-panel {
+      width: 200px;
+      background: #e8ede6;
+      padding: 12px 10px;
+      overflow-y: auto;
+      flex-shrink: 0;
+      border-left: 1px solid #d2ded1;
+      position: relative;
+      z-index: 1;
+    }
+    .right-panel h4 {
+      font-size: 14px;
+      color: #2c4937;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #bccfc4;
+      padding-bottom: 6px;
+    }
+    .right-panel .link-item {
+      display: block;
+      padding: 6px 0;
+      color: #4A6B5A;
+      text-decoration: none;
+      font-size: 13px;
+      border-bottom: 1px dashed #d2ded1;
+    }
+    .right-panel .link-item:hover { text-decoration: underline; }
+    .right-panel .disclaimer {
+      font-size: 12px;
+      color: #6b7a6b;
+      margin-top: 12px;
+      line-height: 1.6;
+    }
+    .file-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      width: 100%;
+      padding: 4px 0 2px;
+    }
+    .file-tag {
+      background: rgba(255,255,255,0.2);
+      border-radius: 16px;
+      padding: 2px 10px 2px 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    .file-tag .remove {
+      cursor: pointer;
+      font-weight: bold;
+      opacity: 0.7;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 16px;
+      padding: 0 2px;
+    }
+    .file-tag .remove:hover { opacity: 1; }
+
+    /* ===== 底部输入区 ===== */
+    .input-area {
+      background: #4A6B5A;
+      padding: 10px 16px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+      border-top: 2px solid #7FCDCD;
+      flex-wrap: nowrap;
+    }
+    .input-area .icon-btn {
+      background: none;
+      border: none;
+      font-size: 28px;
+      color: rgba(255,255,255,0.7);
+      cursor: pointer;
+      padding: 4px 6px;
+      transition: color 0.2s;
+      line-height: 1;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .input-area .icon-btn:hover { color: #fff; }
+    .input-area .icon-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+      font-size: 14px;
+      font-weight: 600;
+      padding: 0 12px;
+      min-width: 44px;
+      height: 34px;
+      background: rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.85);
+      border-radius: 16px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      flex-shrink: 0;
+    }
+      background: rgba(255,255,255,0.25);
+    }
+    .input-area .input-row {
+      flex: 1;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      min-width: 0;
+    }
+    .input-area .input-row input[type="text"] {
+      flex: 1;
+      padding: 10px 14px;
+      border: none;
+      border-radius: 24px;
+      font-size: 0.95rem;
+      outline: none;
+      background: rgba(255,255,255,0.85);
+      transition: background 0.2s;
+      min-width: 0;
+    }
+    .input-area .input-row input[type="text"]:focus {
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(127, 205, 205, 0.3);
+    }
+    .input-area .input-row input[type="text"]:disabled {
+      background: #e0e0e0 !important;
+      color: #888;
+      cursor: not-allowed;
+    }
+    .input-area .input-row button {
+      padding: 0 18px;
+      background: #7FCDCD;
+      color: #1e3326;
+      border: none;
+      border-radius: 24px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      height: 42px;
+      transition: background 0.2s, transform 0.1s;
+      white-space: nowrap;
+    }
+    .input-area .input-row button:hover:not(:disabled) { background: #5bb5b5; }
+    .input-area .input-row button:active:not(:disabled) { transform: scale(0.96); }
+    .input-area .input-row button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* ===== 医生患者手机号输入区 ===== */
+      display: none;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 6px 12px;
+      background: #e8ede6;
+      border-radius: 8px;
+      margin-bottom: 6px;
+    }
+
+    /* ===== 登录浮层 ===== */
+    #identityOverlay {
+      position: fixed; inset:0; background:rgba(44,55,48,0.6); backdrop-filter:blur(6px);
+      display:none; align-items:center; justify-content:center; z-index:9999; padding:20px;
+    }
+    #identityOverlay.active { display:flex; }
+    .auth-card {
+      position:relative; background:#fff; max-width:420px; width:100%; border-radius:32px;
+      padding:36px 28px 28px; box-shadow:0 30px 80px rgba(0,0,0,0.25);
+      text-align:center; border:1px solid rgba(127,205,205,0.3);
+    }
+    .auth-card .brand { font-size:24px; font-weight:700; color:#4A6B5A; letter-spacing:2px; }
+    .auth-card .sub { font-size:14px; color:#6b7a6b; margin:4px 0 20px; }
+    .field-group { text-align:left; margin-bottom:12px; }
+    .field-group label { display:block; font-weight:500; color:#233428; font-size:14px; margin-bottom:4px; }
+    .field-group .row { display:flex; gap:10px; }
+    .auth-card input[type="email"], .auth-card input[type="text"], .auth-card input[type="password"] {
+      width:100%; padding:12px 16px; border:2px solid #dce8d8; border-radius:14px;
+      font-size:15px; outline:none; transition:border 0.2s; background:#fafbfa;
+    }
+    .auth-card input:focus { border-color:#7FCDCD; background:#fff; }
+    .btn-code {
+      padding:0 18px; background:#7FCDCD; border:none; border-radius:14px; color:#1e3326;
+      font-weight:600; font-size:14px; cursor:pointer; white-space:nowrap; transition:background 0.2s; height:48px;
+    }
+    .btn-code:hover:not(:disabled) { background:#5bb5b5; }
+    .btn-code:disabled { opacity:0.5; cursor:not-allowed; }
+    .btn-auth {
+      width:100%; padding:14px; background:#4A6B5A; color:#fff; border:none; border-radius:14px;
+      font-size:18px; font-weight:600; cursor:pointer; margin-top:6px; transition:background 0.2s;
+    }
+    .btn-auth:hover { background:#2c4937; }
+    .error { color:#c0392b; font-size:13px; height:22px; text-align:left; margin-top:2px; }
+    .footnote { font-size:12px; color:#aaa; margin-top:16px; }
+    .tab-btn {
+      background:#e8ede6; border:none; border-radius:20px; padding:6px 18px; cursor:pointer;
+      font-weight:500; color:#4A6B5A; transition:all 0.2s;
+    }
+    .tab-btn.active { background:#4A6B5A; color:#fff; }
+    .tab-btn:not(.active):hover { background:#dce8d8; }
+
+    /* ===== 修改密码弹窗 ===== */
+    .modal-overlay {
+      position:fixed; inset:0; background:rgba(0,0,0,0.4); backdrop-filter:blur(4px);
+      display:none; align-items:center; justify-content:center; z-index:9999;
+    }
+    .modal-overlay.active { display:flex; }
+    .modal {
+      background:#fff; border-radius:24px; padding:30px 28px; max-width:400px; width:90%;
+      box-shadow:0 30px 80px rgba(0,0,0,0.3);
+    }
+    .modal h3 { color:#2c4937; margin-bottom:16px; }
+    .modal .field-group { margin-bottom:14px; text-align:left; }
+    .modal .field-group label { display:block; font-weight:500; font-size:14px; color:#233428; margin-bottom:4px; }
+    .modal .field-group input { width:100%; padding:10px 14px; border:2px solid #dce8d8; border-radius:12px; font-size:15px; outline:none; }
+    .modal .field-group input:focus { border-color:#7FCDCD; }
+    .modal .error { color:#c0392b; font-size:13px; height:22px; text-align:left; }
+    .modal .btn { padding:10px; border:none; border-radius:12px; font-weight:600; cursor:pointer; transition:0.2s; }
+    .modal .btn-primary { background:#4A6B5A; color:#fff; }
+    .modal .btn-primary:hover { background:#2c4937; }
+
+    /* ===== 移动端全屏菜单 ===== */
+    #mobileMenuOverlay {
+      display:none; position:fixed; inset:0; z-index:300;
+      background:rgba(0,0,0,0.5); backdrop-filter:blur(4px);
+      justify-content:center; align-items:center;
+    }
+    #mobileMenuOverlay.show { display:flex; }
+    .menu-panel {
+      background:#fff; border-radius:24px; padding:30px 20px;
+      width:80%; max-width:320px; text-align:center;
+      box-shadow:0 20px 60px rgba(0,0,0,0.3);
+    }
+    .menu-panel h3 { color:#2c4937; margin-bottom:20px; font-size:20px; }
+    .menu-item {
+      display:block; width:100%; padding:16px; margin-bottom:12px;
+      border:none; border-radius:16px; font-size:18px; font-weight:600; cursor:pointer;
+      transition:transform 0.2s;
+    }
+    .menu-item:active { transform:scale(0.96); }
+    .menu-item-guestbook { background:#4A6B5A; color:#fff; }
+    .menu-item-links { background:#7FCDCD; color:#1e3326; }
+    .menu-close {
+      display:block; width:100%; padding:12px;
+      background:#f0f0f0; color:#666; border:none; border-radius:12px;
+      font-size:14px; cursor:pointer;
+    }
+
+    /* ===== 移动端全屏页面 ===== */
+    .fullscreen-page {
+      display:none; position:fixed; inset:0; z-index:301;
+      background:#f4f6f4; flex-direction:column; padding:20px; overflow-y:auto;
+    }
+    .fullscreen-page.show { display:flex; }
+    .fullscreen-header {
+      display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;
+    }
+    .fullscreen-header h3 { color:#2c4937; font-size:20px; }
+    .fullscreen-close {
+      font-size:28px; background:none; border:none; cursor:pointer; color:#666; padding:0 8px;
+    }
+    .fullscreen-body { flex:1; overflow-y:auto; scrollbar-width: none; -ms-overflow-style: none;}
+    .fullscreen-body::-webkit-scrollbar { display: none;}
+    .fullscreen-input-area { display:flex; gap:8px; margin-top:12px; flex-shrink:0;padding-bottom: env(safe-area-inset-bottom, 12px); }
+    .fullscreen-input-area input { flex:1;min-width: 0; padding:10px; border:1px solid #ccc; border-radius:20px; font-size:14px; }
+    .fullscreen-input-area button { padding:10px 20px; background:#4A6B5A; color:#fff; border:none; border-radius:20px; font-weight:600;flex: 0 0 auto;width: auto;min-width: 60px;white-space: nowrap; }
+    .fullscreen-link-item {
+      display:block; padding:14px; background:#fff; border-radius:12px; margin-bottom:10px;
+      color:#4A6B5A; text-decoration:none; font-weight:500;
+    }
+    .fullscreen-disclaimer {
+      margin-top:20px; font-size:12px; color:#6b7a6b; line-height:1.6;
+      padding:12px; background:#e8ede6; border-radius:12px;
+    }
+    .msg-item-full {
+      padding:10px 0; border-bottom:1px dashed #d2ded1;
+    }
+    .msg-item-full .name { font-weight:600; color:#2c4937; }
+    .msg-item-full .time { font-size:11px; color:#6b7a6b; margin-left:8px; }
+    .msg-item-full .content { margin-top:4px; color:#3a4a3a; }
+
+    /* ===== 手机端隐藏电脑侧栏 ===== */
+    @media (max-width: 900px) {
+      .left-panel, .right-panel { display: none; }
+      .menu-toggle { display: block; }
+    }
+
+    /* ===== 手机端底部优化 ===== */
+    @media (max-width: 600px) {
+      body { padding:8px; }
+      .input-area { padding:4px 6px 6px; gap:4px; flex-wrap:nowrap; }
+      .input-area .icon-btn { font-size:18px; height:32px; padding:2px 4px; flex-shrink:0; }
+      .input-area .input-row { flex:1; min-width:0; gap:4px; }
+      .input-area .input-row input[type="text"] { font-size:0.85rem; padding:6px 10px; min-width:0; flex:1; }
+      .input-area .input-row button { padding:0 12px; height:32px; font-size:0.85rem; flex-shrink:0; }
+      #attachBtn { font-size:18px !important; padding:0 2px !important; flex-shrink:0; }
+      .menu-panel { width:90%; padding:20px 16px; }
+      .menu-item { font-size:16px; padding:14px; }
+    }
+  </style>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css/github-markdown.min.css">
+<style>.markdown-body{background:transparent;padding:0;font-size:inherit}.markdown-body pre{overflow:auto}.markdown-body table{display:block;overflow:auto}</style>
+</head>
+<body>
+
+<div class="aitcm-container">
+
+  <!-- ===== 顶部品牌区 ===== -->
+  <div class="aitcm-header">
+    <div class="brand-left">
+      <span class="cn">智慧中医</span>
+      <span class="cn">惠及全球</span>
+    </div>
+    <div class="brand-center">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="200" cy="200" r="140" fill="none" stroke="#7FCDCD" stroke-width="2.5" stroke-dasharray="8 12" opacity="0.6"/>
+        <circle cx="200" cy="200" r="165" fill="none" stroke="#4A6B5A" stroke-width="1.8" stroke-dasharray="4 18" opacity="0.35"/>
+        <circle cx="200" cy="60" r="5" fill="#7FCDCD"/>
+        <circle cx="290" cy="93" r="5" fill="#7FCDCD"/>
+        <circle cx="338" cy="176" r="5" fill="#7FCDCD"/>
+        <circle cx="321" cy="270" r="5" fill="#7FCDCD"/>
+        <circle cx="248" cy="332" r="5" fill="#7FCDCD"/>
+        <circle cx="152" cy="332" r="5" fill="#7FCDCD"/>
+        <circle cx="79" cy="270" r="5" fill="#7FCDCD"/>
+        <circle cx="62" cy="176" r="5" fill="#7FCDCD"/>
+        <circle cx="110" cy="93" r="5" fill="#7FCDCD"/>
+        <circle cx="200" cy="35" r="4" fill="#4A6B5A" opacity="0.4"/>
+        <circle cx="357" cy="149" r="4" fill="#4A6B5A" opacity="0.4"/>
+        <circle cx="297" cy="333" r="4" fill="#4A6B5A" opacity="0.4"/>
+        <circle cx="103" cy="333" r="4" fill="#4A6B5A" opacity="0.4"/>
+        <circle cx="43" cy="149" r="4" fill="#4A6B5A" opacity="0.4"/>
+        <circle cx="200" cy="200" r="100" fill="#4A6B5A"/>
+        <path d="M 200,100 A 100,100 0 0 1 200,300 A 50,50 0 0 1 200,200 A 50,50 0 0 0 200,100" fill="#FFFFFF"/>
+        <circle cx="200" cy="150" r="22" fill="none" stroke="#7FCDCD" stroke-width="2.5" stroke-dasharray="6 8" opacity="0.8"/>
+        <circle cx="200" cy="150" r="28" fill="none" stroke="#7FCDCD" stroke-width="1.8" stroke-dasharray="3 12" opacity="0.6"/>
+        <circle cx="200" cy="128" r="3.5" fill="#7FCDCD" opacity="0.9"/>
+        <circle cx="221" cy="143" r="3.5" fill="#7FCDCD" opacity="0.9"/>
+        <circle cx="213" cy="168" r="3.5" fill="#7FCDCD" opacity="0.9"/>
+        <circle cx="187" cy="168" r="3.5" fill="#7FCDCD" opacity="0.9"/>
+        <circle cx="179" cy="143" r="3.5" fill="#7FCDCD" opacity="0.9"/>
+        <circle cx="200" cy="150" r="11" fill="#FFFFFF"/>
+        <circle cx="200" cy="250" r="22" fill="none" stroke="#7FCDCD" stroke-width="2.5" stroke-dasharray="6 8" opacity="0.8"/>
+        <circle cx="200" cy="250" r="28" fill="none" stroke="#7FCDCD" stroke-width="1.8" stroke-dasharray="3 12" opacity="0.6"/>
+        <circle cx="200" cy="228" r="3.5" fill="#7FCDCD" opacity="0.9"/>
+        <circle cx="221" cy="243" r="3.5" fill="#7FCDCD" opacity="0.9"/>
+        <circle cx="213" cy="268" r="3.5" fill="#7FCDCD" opacity="0.9"/>
+        <circle cx="187" cy="268" r="3.5" fill="#7FCDCD" opacity="0.9"/>
+        <circle cx="179" cy="243" r="3.5" fill="#7FCDCD" opacity="0.9"/>
+        <circle cx="200" cy="250" r="11" fill="#4A6B5A"/>
+      </svg>
+    </div>
+    <div class="brand-right">
+      <span class="en">AITCM</span>
+      <span class="en sub">for the World</span>
+    </div>
+    <button class="menu-toggle" id="menuToggle" aria-label="菜单">☰</button>
+  </div>
+
+  <!-- ===== 中间三栏（电脑端） ===== -->
+  <div class="middle-area">
+    <div class="left-panel">
+      <h4>📋 畅所欲言</h4>
+      <div class="msg-list" id="msgList"></div>
+      <div class="guestbook-input-area">
+        <input type="text" id="guestbookInput" placeholder="寫下您的留言..." maxlength="200" />
+        <button id="guestbookSendBtn">發送</button>
+      </div>
+    </div>
+
+    <div class="chat-wrapper">
+        <label>📱</label>
+      </div>
+      <div class="chat-box" id="chatBox">
+        <div class="message ai-msg">⚡️精算辨证亚健康 扭转时空，<br>🍜药食同源平阴阳 千人千面。<br>您好，我是智慧中医...您可以一次性描述您的主诉和发生经过。如：腹泻3天，因什么原因后出现腹泻，具体详细情况...</div>
+      </div>
+      <div class="file-list" id="fileList"></div>
+    </div>
+
+    <div class="right-panel">
+      <h4>🔗 快捷連結</h4>
+      <div id="desktopLinksContainer"></div>
+      <div class="disclaimer"></div>
+    </div>
+  </div>
+
+  <!-- ===== 底部输入区 ===== -->
+  <div class="input-area">
+    <div class="input-row">
+      <input type="file" id="fileInput" style="display:none" multiple accept="image/*,.pdf,.doc,.docx,.txt" capture="environment" />
+      <input type="text" id="userInput" placeholder="请先登录" disabled style="background:#e0e0e0;" />
+      <button id="sendBtn" disabled>發送</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== 登录浮层 ===== -->
+<div id="identityOverlay">
+  <div class="auth-card">
+    <button onclick="document.getElementById('identityOverlay').classList.remove('active')" 
+            style="position:absolute; right:16px; top:16px; background:none; border:none; font-size:24px; color:#999; cursor:pointer; padding:4px 8px; line-height:1; border-radius:50%; transition:background 0.2s;"
+            onmouseover="this.style.background='#f0f0f0'" onmouseout="this.style.background='transparent'">✕</button>
+    <div class="brand">🌿 AITCM</div>
+    <div class="sub">智慧中醫 · 惠及全球</div>
+    <div style="display:flex; gap:8px; margin-bottom:16px; justify-content:center;">
+      <button class="tab-btn active" data-tab="user">顾客</button>
+    </div>
+    <div id="userTab">
+      <div class="field-group">
+        <label>📧 電子郵箱</label>
+        <div class="row">
+          <input type="email" id="emailInput" placeholder="請輸入您的郵箱" />
+          <button class="btn-code" id="getCodeBtn">獲取驗證碼</button>
+        </div>
+      </div>
+      <div class="field-group">
+        <label>🔑 驗證碼</label>
+        <input type="text" id="codeInput" placeholder="請輸入 4 位驗證碼" maxlength="4" />
+      </div>
+      <div class="error" id="identityError"></div>
+      <button class="btn-auth" id="authBtn">開始沟通</button>
+      <div class="footnote">驗證碼將發送至您的郵箱，5分鐘內有效</div>
+    </div>
+      <div class="field-group">
+        <label>👤 账号</label>
+      </div>
+      <div class="field-group">
+        <label>🔒 密码</label>
+      </div>
+      <div class="footnote">医生专属入口，请使用分配账号登录</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 修改密码弹窗 ===== -->
+  <div class="modal">
+    <h3>🔑 修改密码</h3>
+    <div style="display:flex; gap:10px; margin-top:10px;">
+    </div>
+  </div>
+</div>
+
+<!-- ===== 移动端全屏菜单 ===== -->
+<div id="mobileMenuOverlay">
+  <div class="menu-panel">
+    <h3>☰ 菜单</h3>
+    <button class="menu-item menu-item-guestbook" data-target="guestbook">📋 畅所欲言</button>
+    <button class="menu-item menu-item-links" data-target="links">🔗 快捷連結</button>
+    <button class="menu-close" id="menuCloseBtn">关闭</button>
+  </div>
+</div>
+
+<!-- ===== 移动端全屏留言板 ===== -->
+<div class="fullscreen-page" id="fullscreenGuestbook">
+  <div class="fullscreen-header">
+    <h3>📋 畅所欲言</h3>
+    <button class="fullscreen-close" id="closeGuestbook">✕</button>
+  </div>
+  <div class="fullscreen-body" id="fullscreenMsgList"></div>
+  <div class="fullscreen-input-area">
+    <input type="text" id="fullscreenGuestInput" placeholder="寫下您的留言..." maxlength="200" />
+    <button id="fullscreenGuestSend">發送</button>
+  </div>
+</div>
+
+<!-- ===== 移动端全屏快捷链接 ===== -->
+<div class="fullscreen-page" id="fullscreenLinks">
+  <div class="fullscreen-header">
+    <h3>🔗 快捷連結</h3>
+    <button class="fullscreen-close" id="closeLinks">✕</button>
+  </div>
+  <div class="fullscreen-body">
+    <div id="mobileLinksList"></div>
+    <div class="fullscreen-disclaimer"></div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// 配置
+// ============================================================
+// ============================================================
+// 🎨 可自訂設定區 — 修改以下變數即可客製化品牌
+// ============================================================
+const CUSTOM = {
+    BRAND_CN: '智慧中医',
+    BRAND_EN: 'AITCM',
+    BRAND_TAGLINE: 'for the World',
+    BRAND_SUBTITLE: '惠及全球',
+    LOGO_SVG: null,
+    PRIMARY_COLOR: '#4A6B5A',
+    ACCENT_COLOR: '#7FCDCD',
+    WELCOME_MSG: '您好，我是智慧中医...您可以一次性描述您的主诉和发生经过。',
+    LOGIN_TITLE: '🌿 AITCM',
+    LOGIN_SUBTITLE: '智慧中醫 · 惠及全球'
+};
+
+// 🎨 可自訂設定區 — 修改以下變數即可客製化品牌
+// ⚠️ 請勿修改 API_URL 與 BACKEND_URL，除非你已部署自己的後端
+const CUSTOM = {
+    BRAND_CN: '智慧中医',
+    BRAND_EN: 'AITCM',
+    BRAND_TAGLINE: 'for the World',
+    BRAND_SUBTITLE: '惠及全球',
+    LOGO_COLOR_PRIMARY: '#4A6B5A',
+    LOGO_COLOR_ACCENT: '#7FCDCD',
+    WELCOME_MESSAGE: '您好，我是智慧中醫，請描述您的健康狀況。'
+};
+
+// ============================================================
+// API 配置（指向你的後端，fork 後可改為你自己的伺服器）
+// ============================================================
+const API_BASE = 'https://aitcm.cpolar.io';
+const DIFY_API_URL = API_BASE + '/dify/v1/chat-messages';
+const BACKEND_URL = API_BASE;
+const DIFY_UPLOAD_URL = API_BASE + '/dify/v1/files/upload';
+
+// ============================================================
+// 【统一管理】快捷链接数据（桌面端和移动端共用）
+// ============================================================
+const quickLinks = [
+    { icon: '✈️', text: 'Telegram Home', url: 'https://t.me/aitcm_com' },
+    { icon: '📧', text: '聯絡我們', url: '#' },
+    { icon: '📄', text: '隱私政策', url: '#' },
+    { icon: '🌐', text: 'GitHub 原始碼', url: '#' }
+];
+
+// ============================================================
+// 【统一管理】简短免责声明（桌面端和移动端共用）
+// ============================================================
+const DISCLAIMER_SHORT = `<strong>⚡️AITCM智慧中醫</strong><br>★大數據經典★名醫智慧集成★智能自我迭代★辨證論治指導★食材處方化★健康生活化★個體生態管家...`;
+
+// ============================================================
+// 状态
+// ============================================================
+let userPhone = null;
+let conversationId = null;
+let isProcessing = false;
+let uploadedFiles = [];
+let isVerified = false;
+let guestbookMessages = [];
+let customerEmail = null;
+let userRole = 'customer';
+
+// ============================================================
+// DOM 元素
+// ============================================================
+const chatBox = document.getElementById('chatBox');
+const userInput = document.getElementById('userInput');
+const sendBtn = document.getElementById('sendBtn');
+const fileInput = document.getElementById('fileInput');
+const fileList = document.getElementById('fileList');
+const menuToggle = document.getElementById('menuToggle');
+const msgList = document.getElementById('msgList');
+const guestbookInput = document.getElementById('guestbookInput');
+const guestbookSendBtn = document.getElementById('guestbookSendBtn');
+const identityOverlay = document.getElementById('identityOverlay');
+const emailInput = document.getElementById('emailInput');
+const codeInput = document.getElementById('codeInput');
+const getCodeBtn = document.getElementById('getCodeBtn');
+const authBtn = document.getElementById('authBtn');
+const identityError = document.getElementById('identityError');
+const tabBtns = document.querySelectorAll('.tab-btn');
+const userTab = document.getElementById('userTab');
+// 公開版：無醫生模式，modeToggleBtn 保留但隱藏
+const modeToggleBtn = null;
+
+// ============================================================
+// 免责声明检查（跳转 disclaimer.html）
+// ============================================================
+function checkDisclaimer() {
+    if (!localStorage.getItem('disclaimerAgreed')) {
+        window.location.href = '/disclaimer_public.html';
+        return false;
+    }
+    return true;
+}
+
+// ============================================================
+// 工具函数
+// ============================================================
+function escapeHtml(text) {
+  const d = document.createElement('div');
+  d.textContent = text;
+  return d.innerHTML;
+}
+
+function formatDisplayName(email) {
+  if (!email) return '用户';
+  const parts = email.split('@');
+  if (parts.length !== 2) return email;
+  let short = parts[0].substring(0, 3);
+  while (short.length < 3) short += '*';
+  return short + '***@' + parts[1];
+}
+
+function scrollToBottom() { chatBox.scrollTop = chatBox.scrollHeight; }
+
+function appendMessage(role, content, isError = false, id = null) {
+  const div = document.createElement('div');
+  if (id) div.id = id;
+  div.className = `message ${role === 'user' ? 'user-msg' : 'ai-msg'}`;
+  if (isError) div.classList.add('error');
+  if (role === 'ai' && !isError) {
+    div.classList.add('markdown-body');
+    div.innerHTML = marked.parse(content);
+  } else {
+    div.textContent = content;
+  }
+  chatBox.appendChild(div);
+  scrollToBottom();
+  return div;
+}
+
+// ============================================================
+// 渲染通用内容（快捷链接 + 简短免责声明）
+// ============================================================
+function renderCommonContent() {
+    // 桌面端：快捷链接
+    const desktopContainer = document.getElementById('desktopLinksContainer');
+    if (desktopContainer) {
+        desktopContainer.innerHTML = '';
+        quickLinks.forEach(link => {
+            const a = document.createElement('a');
+            a.href = link.url;
+            a.className = 'link-item';
+            a.target = '_blank';
+            a.textContent = `${link.icon} ${link.text}`;
+            desktopContainer.appendChild(a);
+        });
+    }
+
+    // 移动端：快捷链接
+    const mobileList = document.getElementById('mobileLinksList');
+    if (mobileList) {
+        mobileList.innerHTML = '';
+        quickLinks.forEach(link => {
+            const a = document.createElement('a');
+            a.href = link.url;
+            a.className = 'fullscreen-link-item';
+            a.target = '_blank';
+            a.textContent = `${link.icon} ${link.text}`;
+            mobileList.appendChild(a);
+        });
+    }
+
+    // 桌面端：简短免责声明
+    const desktopDisclaimer = document.querySelector('.right-panel .disclaimer');
+    if (desktopDisclaimer) {
+        desktopDisclaimer.innerHTML = DISCLAIMER_SHORT;
+    }
+
+    // 移动端：简短免责声明
+    const mobileDisclaimer = document.querySelector('.fullscreen-disclaimer');
+    if (mobileDisclaimer) {
+        mobileDisclaimer.innerHTML = DISCLAIMER_SHORT;
+    }
+}
+
+// ============================================================
+// 输入框状态
+// ============================================================
+function updateInputState() {
+  const isLoggedIn = isVerified && (
+    (userRole === 'customer' && customerEmail) ||
+  );
+  userInput.disabled = !isLoggedIn;
+  sendBtn.disabled = !isLoggedIn;
+  userInput.style.background = isLoggedIn ? 'rgba(255,255,255,0.85)' : '#e0e0e0';
+  userInput.placeholder = isLoggedIn ? '請描述您的健康状况...' : '请先登录';
+}
+
+// ============================================================
+// 模式按钮更新
+// ============================================================
+function updateModeButton(mode) {
+  if (modeToggleBtn) {
+  }
+}
+
+// ============================================================
+// 留言板
+// ============================================================
+// 留言板（最終優化合體版：無滾動條跑馬燈 + 滑鼠移入暫停）
+// ============================================================
+
+// 💡 1. 自動注入隱藏滾動條的 CSS 樣式（免找 CSS 檔案）
+(function() {
+  const style = document.createElement('style');
+  style.innerHTML = `
+    #msgList, #fullscreenMsgList {
+        overflow-y: scroll !important;
+        scrollbar-width: none !important;    /* Firefox */
+        -ms-overflow-style: none !important; /* IE / Edge */
+    }
+    #msgList::-webkit-scrollbar, 
+    #fullscreenMsgList::-webkit-scrollbar {
+        display: none !important;
+    }
+  `;
+  document.head.appendChild(style);
+})();
+
+// 💡 2. 核心數據非同步載入
+async function loadMessages() {
+  try {
+    const res = await fetch('/api/guestbook');
+    if (!res.ok) throw new Error('加载留言失败');
+    guestbookMessages = await res.json();
+    renderMessages();
+    renderFullscreenMessages();
+    
+    // 數據渲染完成後，立刻啟動跑馬燈與滑鼠監聽
+    initMarqueeScroll();
+  } catch (e) {
+    console.error('加载留言失败:', e);
+    guestbookMessages = [];
+    renderMessages();
+    renderFullscreenMessages();
+  }
+}
+
+// 💡 3. 渲染常規留言板
+function renderMessages() {
+  if (guestbookMessages.length === 0) {
+    msgList.innerHTML = '<div style="color:#6b7a6b;padding:10px 0;text-align:center;">暫無留言</div>';
+    return;
+  }
+  let html = '';
+  const sorted = [...guestbookMessages].sort((a, b) => b.time - a.time);
+  sorted.forEach(item => {
+    const timeStr = new Date(item.time * 1000).toLocaleString('zh-CN', { hour12: false });
+    html += `<div class="msg-item"><div class="name">${escapeHtml(item.name)} <span class="time">${timeStr}</span></div><div class="content">${escapeHtml(item.content)}</div></div>`;
+  });
+  msgList.innerHTML = html;
+  msgList.scrollTop = 0; // 重置到頂部，交給跑馬燈接管
+}
+
+// 💡 4. 渲染全螢幕留言板
+function renderFullscreenMessages() {
+  const container = document.getElementById('fullscreenMsgList');
+  if (!container) return;
+  if (guestbookMessages.length === 0) {
+    container.innerHTML = '<div style="color:#6b7a6b;padding:20px;text-align:center;">暫無留言</div>';
+    return;
+  }
+  let html = '';
+  const sorted = [...guestbookMessages].sort((a, b) => b.time - a.time);
+  sorted.forEach(item => {
+    const timeStr = new Date(item.time * 1000).toLocaleString('zh-CN', { hour12: false });
+    html += `<div class="msg-item-full"><div class="name">${escapeHtml(item.name)} <span class="time">${timeStr}</span></div><div class="content">${escapeHtml(item.content)}</div></div>`;
+  });
+  container.innerHTML = html;
+  container.scrollTop = 0; // 重置到頂部
+}
+
+// 💡 5. 跑馬燈初始化控制器
+function initMarqueeScroll() {
+  if (typeof msgList !== 'undefined' && msgList) {
+    startAutoScroll(msgList);
+  }
+  const fullContainer = document.getElementById('fullscreenMsgList');
+  if (fullContainer) {
+    startAutoScroll(fullContainer);
+  }
+}
+
+// 💡 6. 核心自動滾動監聽（控制滑鼠移入暫停，移出繼續）
+function startAutoScroll(element) {
+  if (!element) return;
+  if (element.scrollHeight <= element.clientHeight) return;
+
+  function runScroll() {
+    if (element.dataset.timerId) return; 
+    
+    const timerId = setInterval(() => {
+      element.scrollTop += 1;
+      if (element.scrollTop >= (element.scrollHeight - element.clientHeight - 1)) {
+        element.scrollTop = 0;
+      }
+    }, 40); // 40毫秒滾動1像素，可以調整此數字改變速度
+    
+    element.dataset.timerId = timerId;
+  }
+
+  function stopScroll() {
+    if (element.dataset.timerId) {
+      clearInterval(parseInt(element.dataset.timerId));
+      element.removeAttribute('data-timer-id');
+    }
+  }
+
+  stopScroll();
+  element.onmouseenter = null;
+  element.onmouseleave = null;
+
+  element.onmouseenter = () => { stopScroll(); }; // 滑鼠移入暫停
+  element.onmouseleave = () => { runScroll();  }; // 滑鼠移出繼續
+
+  runScroll();
+}
+
+// 💡 7. 發表新留言邏輯
+async function addGuestbookMessage(content) {
+  if (!isVerified) return;
+  let displayName;
+  } else if (customerEmail) {
+    displayName = formatDisplayName(customerEmail);
+  } else {
+    displayName = '用户';
+  }
+  try {
+    await fetch('/api/guestbook', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: displayName, content: content.trim() })
+    });
+    await loadMessages();
+  } catch (e) {
+    console.error('发送留言失败:', e);
+    alert('留言发送失败，请稍后重试');
+  }
+}
+
+// 💡 8. 事件監聽綁定
+guestbookSendBtn.addEventListener('click', async () => {
+  const text = guestbookInput.value.trim();
+  if (!text) return;
+  if (!isVerified) { triggerAuth(); return; }
+  await addGuestbookMessage(text);
+  guestbookInput.value = '';
+});
+
+guestbookInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') { e.preventDefault(); guestbookSendBtn.click(); }
+});
+
+// ============================================================
+// 认证浮层（增加免责声明检查）
+// ============================================================
+function triggerAuth() {
+  if (!checkDisclaimer()) return;
+  identityOverlay.classList.add('active');
+  tabBtns.forEach(b => b.classList.remove('active'));
+  document.querySelector('.tab-btn[data-tab="user"]').classList.add('active');
+  userTab.style.display = 'block';
+  identityError.textContent = '';
+  emailInput.focus();
+}
+
+  if (!checkDisclaimer()) return;
+  identityOverlay.classList.add('active');
+  tabBtns.forEach(b => b.classList.remove('active'));
+  userTab.style.display = 'none';
+  identityError.textContent = '';
+}
+
+tabBtns.forEach(btn => {
+  btn.addEventListener('click', function() {
+    tabBtns.forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    const tab = this.dataset.tab;
+    userTab.style.display = tab === 'user' ? 'block' : 'none';
+    identityError.textContent = '';
+  });
+});
+
+// ============================================================
+// 顾客验证码
+// ============================================================
+let countdownTimer = null;
+getCodeBtn.addEventListener('click', async () => {
+  const email = emailInput.value.trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    identityError.textContent = '❌ 請輸入有效的郵箱地址';
+    return;
+  }
+  identityError.textContent = '';
+  try {
+    getCodeBtn.disabled = true;
+    getCodeBtn.textContent = '發送中...';
+    const res = await fetch(`${BACKEND_URL}/send-verification`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email })
+    });
+    const data = await res.json();
+    if (res.ok) {
+      identityError.textContent = '✅ 驗證碼已發送，請查收郵件';
+      let seconds = 60;
+      getCodeBtn.textContent = `${seconds}s`;
+      countdownTimer = setInterval(() => {
+        seconds--;
+        getCodeBtn.textContent = `${seconds}s`;
+        if (seconds <= 0) {
+          clearInterval(countdownTimer);
+          getCodeBtn.disabled = false;
+          getCodeBtn.textContent = '重新獲取';
+        }
+      }, 1000);
+      codeInput.disabled = false;
+      codeInput.focus();
+    } else {
+      identityError.textContent = '❌ ' + (data.error || '發送失敗');
+      getCodeBtn.disabled = false;
+      getCodeBtn.textContent = '獲取驗證碼';
+    }
+  } catch (err) {
+    identityError.textContent = '❌ 網絡錯誤，請稍後重試';
+    getCodeBtn.disabled = false;
+    getCodeBtn.textContent = '獲取驗證碼';
+  }
+});
+
+async function handleAuth() {
+  const email = emailInput.value.trim();
+  const code = codeInput.value.trim();
+  if (!email || !code) { identityError.textContent = '❌ 請輸入郵箱和驗證碼'; return; }
+  try {
+    const res = await fetch(`${BACKEND_URL}/verify-code`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, code })
+    });
+    const data = await res.json();
+    if (res.ok) {
+      identityError.textContent = '';
+      customerEmail = email;
+      userPhone = email;
+      isVerified = true;
+      userRole = 'customer';
+      localStorage.setItem('customerEmail', email);
+      identityOverlay.classList.remove('active');
+      if (countdownTimer) clearInterval(countdownTimer);
+      switchMode('customer', false);
+      updateModeButton('customer');
+      appendMessage('ai', `您好，${formatDisplayName(email)}，已为您开启服务。`);
+      loadMessages();
+    } else {
+      identityError.textContent = '❌ ' + (data.error || '驗證失敗');
+    }
+  } catch (err) {
+    identityError.textContent = '❌ 網絡錯誤，請稍後重試';
+  }
+}
+
+authBtn.addEventListener('click', handleAuth);
+emailInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') getCodeBtn.click(); });
+codeInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') handleAuth(); });
+
+// ============================================================
+  try {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    });
+    const data = await res.json();
+    if (res.ok) {
+      isVerified = true;
+      userPhone = null;
+      identityOverlay.classList.remove('active');
+    } else {
+    }
+  } catch (err) {
+  }
+});
+
+
+// ============================================================
+// 切换模式
+// ============================================================
+function switchMode(mode, showPrompt = true) {
+  userRole = mode;
+  updateModeButton(mode);
+
+      isVerified = true;
+      updateInputState();
+    } else {
+      isVerified = false;
+      updateInputState();
+    }
+  } else {
+    if (customerEmail) {
+      userPhone = customerEmail;
+      isVerified = true;
+      updateInputState();
+    } else {
+      const saved = localStorage.getItem('customerEmail');
+      if (saved) {
+        customerEmail = saved;
+        userPhone = saved;
+        isVerified = true;
+        updateInputState();
+        appendMessage('ai', `🔄 已恢复顾客 ${formatDisplayName(saved)} 的会话。`);
+      } else {
+        isVerified = false;
+        updateInputState();
+        if (showPrompt) triggerAuth();
+      }
+    }
+  }
+}
+
+// ============================================================
+// 模式切换按钮点击
+// ============================================================
+  switchMode(nextMode, true);
+});
+
+// ============================================================
+// 医生患者手机号
+// ============================================================
+  if (phone) {
+    appendMessage('ai', `📱 已设置患者手机号：${phone}`);
+  } else {
+    alert('请输入患者手机号');
+  }
+});
+});
+
+// ============================================================
+}
+
+});
+
+
+  try {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+      body: JSON.stringify({ old_password: oldPwd, new_password: newPwd })
+    });
+    const data = await response.json();
+    if (response.ok) {
+      alert('✅ 密码修改成功！');
+    } else {
+    }
+});
+
+
+// ============================================================
+// 文件上传
+// ============================================================
+function uploadFile(file) {
+  return new Promise((resolve, reject) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('user', 'web-user');
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', DIFY_UPLOAD_URL);
+    xhr.onload = function() {
+      if (xhr.status === 200 || xhr.status === 201) {
+        try { resolve(JSON.parse(xhr.responseText)); } catch(e) { reject(new Error('解析响应失败')); }
+      } else {
+        reject(new Error(`上传失败 (${xhr.status}): ${xhr.responseText}`));
+      }
+    };
+    xhr.onerror = function() { reject(new Error('网络请求失败')); };
+    xhr.send(formData);
+  });
+}
+
+const inputRow = document.querySelector('.input-row');
+const attachBtn = document.createElement('button');
+attachBtn.className = 'icon-btn';
+attachBtn.id = 'attachBtn';
+attachBtn.textContent = '📎';
+attachBtn.style.fontSize = '22px';
+attachBtn.style.padding = '0 4px';
+attachBtn.title = '上傳附件';
+const sendBtnElement = document.getElementById('sendBtn');
+inputRow.insertBefore(attachBtn, sendBtnElement);
+
+attachBtn.addEventListener('click', () => {
+  if (!isVerified) {
+    else triggerAuth();
+    return;
+  }
+  fileInput.click();
+});
+
+fileInput.addEventListener('change', async (e) => {
+  const files = Array.from(e.target.files);
+  if (files.length === 0) return;
+  fileInput.value = '';
+  for (const file of files) {
+    const tempId = 'temp_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6);
+    const fileItem = { id: tempId, name: file.name, type: file.type || 'application/octet-stream', status: 'uploading', file: file };
+    uploadedFiles.push(fileItem);
+    renderFileList();
+    try {
+      const uploadData = await uploadFile(file);
+      fileItem.id = uploadData.id;
+      fileItem.status = 'done';
+      delete fileItem.file;
+      console.log('✅👌文件上传成功，ID:', uploadData.id);
+    } catch (err) {
+      fileItem.status = 'error';
+      console.error('❎上传失败:', fileItem.name, err);
+    }
+    renderFileList();
+  }
+});
+
+function removeFile(index) { uploadedFiles.splice(index, 1); renderFileList(); }
+function renderFileList() {
+  if (uploadedFiles.length === 0) { fileList.innerHTML = ''; return; }
+  let html = '';
+  uploadedFiles.forEach((item, idx) => {
+    const statusText = item.status === 'uploading' ? ' ⏳ 上傳中...' : (item.status === 'error' ? ' ❌ 上傳失敗' : ' ✅ 上傳成功');
+    html += `<div class="file-tag"><span>${item.name}${statusText}</span>${item.status === 'done' ? `<button class="remove" data-index="${idx}">✕</button>` : ''}</div>`;
+  });
+  fileList.innerHTML = html;
+  fileList.querySelectorAll('.remove').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const index = parseInt(e.target.dataset.index);
+      removeFile(index);
+    });
+  });
+}
+
+// ============================================================
+// 发送消息
+// ============================================================
+async function sendMessage() {
+  const text = userInput.value.trim();
+  if (!text && uploadedFiles.length === 0) return;
+  if (isProcessing) return;
+
+  let phoneValue = '';
+  } else {
+    if (!isVerified || !customerEmail) {
+      const saved = localStorage.getItem('customerEmail');
+      if (saved) { customerEmail = saved; userPhone = saved; isVerified = true; }
+      else { triggerAuth(); return; }
+    }
+    phoneValue = customerEmail;
+  }
+
+  const hasUploading = uploadedFiles.some(f => f.status === 'uploading');
+  if (hasUploading) { alert('尚有文件正在上傳，請稍後再試'); return; }
+
+  isProcessing = true;
+  userInput.disabled = true;
+  sendBtn.disabled = true;
+  attachBtn.disabled = true;
+
+  const filesPayload = uploadedFiles.filter(f => f.status === 'done').map(f => ({
+    type: f.type.startsWith('image/') ? 'image' : 'document',
+    transfer_method: 'local_file',
+    upload_file_id: f.id,
+  }));
+
+  if (text) appendMessage('user', text);
+  if (filesPayload.length > 0) {
+    const fileNames = uploadedFiles.filter(f => f.status === 'done').map(f => f.name).join(', ');
+    appendMessage('user', `📎 附件：${fileNames}`);
+  }
+  userInput.value = '';
+  uploadedFiles = [];
+  renderFileList();
+  scrollToBottom();
+
+  const thinkingId = 'thinking_' + Date.now();
+  const thinkingEl = appendMessage('ai', '', false, thinkingId);
+  thinkingEl.innerHTML = `<div class="typing-dots"><span></span><span></span><span></span></div>`;
+  thinkingEl.style.border = 'none';
+  thinkingEl.style.background = 'transparent';
+  thinkingEl.style.padding = '4px 0';
+  scrollToBottom();
+
+  try {
+    const requestBody = {
+      inputs: { phone: phoneValue },
+      query: text || '查看附件',
+      files: filesPayload,
+      response_mode: 'blocking',
+      conversation_id: conversationId || null,
+      user: 'web-user',
+    };
+    console.log('📦 请求体:', JSON.stringify(requestBody, null, 2));
+
+    const response = await fetch(DIFY_API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(requestBody),
+    });
+    const thinkingElem = document.getElementById(thinkingId);
+    if (thinkingElem) thinkingElem.remove();
+
+    if (!response.ok) {
+      const errText = await response.text();
+      throw new Error(`API错误，请继续输入：`);
+    }
+    const data = await response.json();
+    if (data.conversation_id) conversationId = data.conversation_id;
+    const answer = data.answer || '（无回复内容）';
+    appendMessage('ai', answer);
+  } catch (error) {
+    const thinkingElem = document.getElementById(thinkingId);
+    if (thinkingElem) thinkingElem.remove();
+    console.error('API调用失败:');
+    appendMessage('ai', `⚠️ 连线失败。请检查网络后重新输入：`, true);
+  } finally {
+    isProcessing = false;
+    userInput.disabled = !isVerified;
+    sendBtn.disabled = !isVerified;
+    attachBtn.disabled = false;
+    userInput.focus();
+    scrollToBottom();
+  }
+}
+
+userInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && !e.shiftKey && !userInput.disabled) {
+    e.preventDefault();
+    sendMessage();
+  }
+});
+sendBtn.addEventListener('click', sendMessage);
+
+// ============================================================
+// 移动端菜单
+// ============================================================
+const mobileMenu = document.getElementById('mobileMenuOverlay');
+const menuCloseBtn = document.getElementById('menuCloseBtn');
+const fullGuestbook = document.getElementById('fullscreenGuestbook');
+const fullLinks = document.getElementById('fullscreenLinks');
+const closeGuestbook = document.getElementById('closeGuestbook');
+const closeLinks = document.getElementById('closeLinks');
+
+function closeMenu() { mobileMenu.classList.remove('show'); }
+
+menuToggle.addEventListener('click', function(e) {
+  e.stopPropagation();
+  mobileMenu.classList.toggle('show');
+});
+
+menuCloseBtn.addEventListener('click', closeMenu);
+mobileMenu.addEventListener('click', function(e) {
+  if (e.target === this) closeMenu();
+});
+
+document.querySelectorAll('.menu-item').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const target = this.dataset.target;
+    closeMenu();
+    if (target === 'guestbook') {
+      fullGuestbook.classList.add('show');
+      renderFullscreenMessages();
+    } else if (target === 'links') {
+      fullLinks.classList.add('show');
+    }
+  });
+});
+
+closeGuestbook.addEventListener('click', () => fullGuestbook.classList.remove('show'));
+closeLinks.addEventListener('click', () => fullLinks.classList.remove('show'));
+
+// 全屏留言发送
+document.getElementById('fullscreenGuestSend').addEventListener('click', async function() {
+  const input = document.getElementById('fullscreenGuestInput');
+  const text = input.value.trim();
+  if (!text) return;
+  if (!isVerified) {
+    else triggerAuth();
+    return;
+  }
+  await addGuestbookMessage(text);
+  input.value = '';
+  renderFullscreenMessages();
+});
+document.getElementById('fullscreenGuestInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') document.getElementById('fullscreenGuestSend').click();
+});
+
+// ============================================================
+// 恢复会话
+// ============================================================
+  if (token && name) {
+    isVerified = true;
+    userPhone = null;
+    return true;
+  }
+  return false;
+}
+
+function restoreCustomerSession() {
+  const saved = localStorage.getItem('customerEmail');
+  if (saved) {
+    customerEmail = saved;
+    userPhone = saved;
+    isVerified = true;
+    userRole = 'customer';
+    return true;
+  }
+  return false;
+}
+
+// ============================================================
+// 启动
+// ============================================================
+window.addEventListener('load', function() {
+  // 检查 URL 参数，如果携带 agreed=true 则存储并清除参数
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('agreed') === 'true') {
+    localStorage.setItem('disclaimerAgreed', 'true');
+    window.history.replaceState({}, document.title, window.location.pathname);
+  }
+
+  // 渲染通用内容（快捷链接 + 简短免责声明）
+  renderCommonContent();
+
+  loadMessages();
+  if (!hasDoctor) {
+    const hasCustomer = restoreCustomerSession();
+    if (hasCustomer) {
+      switchMode('customer', false);
+      updateModeButton('customer');
+    } else {
+      switchMode('customer', false);
+      updateModeButton('customer');
+    }
+  }
+});
+</script>
+</body>
+</html>
