@@ -89,3 +89,14 @@ const CUSTOM = {
 ## 🌟 貢獻
 
 歡迎 Issue 與 Pull Request！如有任何問題，請透過 [Telegram](https://t.me/aitcm_com) 聯絡。
+
+---
+
+## ☕ 支持我們
+
+如果 AITCM 對您有幫助，歡迎請我們喝杯咖啡 ☕
+
+**USDT (TRC-20)：**
+```
+TPDqSKBip7JGvnupDZpDRe2oykjY8SqvNy
+```
