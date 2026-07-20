@@ -1,1 +1,91 @@
-IyDwn42DIEFJVENNIMK3IOaZuuaFp+S4remGqyDmg6Dlj4rlhajnkIMKCj4gQUlUQ03vvIhBcnRpZmljaWFsIEludGVsbGlnZW5jZSBUcmFkaXRpb25hbCBDaGluZXNlIE1lZGljaW5l77yJ4oCUIOWfuuaWvOWkp+aVuOaTmuiIh+WQjemGq+aZuuaFp+eahCBBSSDkuK3phqvovqjorYnoq5bmsrvns7vntbHjgIIKClshW0xpY2Vuc2U6IE1JVF0oaHR0cHM6Ly9pbWcuc2hpZWxkcy5pby9iYWRnZS9MaWNlbnNlLU1JVC1ncmVlbi5zdmcpXShMSUNFTlNFKQoKLS0tCgojIyDwn5OLIOWwiOahiOiqquaYjgoK5pysIFJlcG8g54K6IEFJVENNIOezu+e1seeahCAqKuWFqOeQg+WFrOmWi+eJiOWJjeerryoq77yM5Lu75L2V5Lq66YO95Y+v5Lul77yaCgotIOKchSDnm7TmjqXoqKrllY8gW2h0dHBzOi8vYWl0Y20uY3BvbGFyLmlvXShodHRwczovL2FpdGNtLmNwb2xhci5pbykg5L2/55SoCi0g4pyFIEZvcmsg5b6M5L+u5pS55YmN56uv5qij5byP5oiW5ZOB54mM5ZCN56ixCi0g4pyFIOmDqOe9suiHquW3seeahOeJiOacrAoKPiDimqDvuI8g5pysIFJlcG8gKirlg4XljIXlkKvliY3nq6/ljp/lp4vnorwqKu+8iEhUTUwgKyBDU1MgKyBKYXZhU2NyaXB077yJ77yM5b6M56uv5pyN5YuZ5pyq5YWs6ZaL44CCCgotLS0KCiMjIPCfmoAg5b+r6YCf6ZaL5aeLCgojIyMg55u05o6l5L2/55SoCgrnhKHpnIDlronoo53ku7vkvZXmnbHopb/vvIzmiZPplovngI/opr3lmajljbPlj6/vvJoKCmBgYApodHRwczovL2FpdGNtLmNwb2xhci5pbwpgYGAKCiMjIyDoh6rooYzpg6jnvbIKCjEuICoqRm9yayDmnKwgUmVwbyoqCjIuIOS/ruaUuSBgaW5kZXhfcHVibGljLmh0bWxgIOmWi+mgreeahCBgQVBJX0JBU0VgIOaMh+WQkeS9oOiHquW3seeahOW+jOerr+S8uuacjeWZqAozLiDpg6jnvbLliLDkvaDnmoTntrLpoIHkvLrmnI3lmajvvIhHaXRIdWIgUGFnZXPjgIFWZXJjZWzjgIFOZ2lueCDnrYnnmoblj6/vvIkKCi0tLQoKIyMg8J+boO+4jyDlip/og73oiIfnibnoibIKCiMjIyDimqHvuI8gQUlUQ00g5pm65oWn5Lit6YarCgo+ICoq5aSn5pW45pOa57aT5YW4IMOXIOWQjemGq+aZuuaFp+mbhuaIkCoqCgotIPCfl6PvuI8gKipBSSDkuK3phqvovqjorYnlsI3oqbEqKiDigJQg6Ly45YWl55eH54uA77yMQUkg5Y2z5pmC5o+Q5L6b6L6o6K2J6KuW5rK75bu66K2wCi0g8J+TpyAqKumDteeusempl+itieeZu+WFpSoqIOKAlCDnmbzpgIHpqZforYnnorzoh7Ppg7XnrrHvvIw1IOWIhumQmOWFp+W/q+mAn+mpl+itiQotIPCfk50gKirnlZnoqIDkuqTmtYEqKiDigJQg5Yy/5ZCN55WZ6KiA5p2/77yM5L2/55So6ICF5Lqk5rWB6aSK55Sf5b+D5b6XCi0g8J+MkCAqKuS4reiLsembmeiqnuaUr+aPtCoqIOKAlCDku4vpnaLlrozmlbTmlK/mj7TkuK3oi7HmlofliIfmj5sKLSDwn5OxICoq5YWo6Z2i56e75YuV56uv6YGp6YWNKiog4oCUIOaJi+apn+OAgeW5s+adv+OAgeahjOmdoueahuWPr+a1geaaouS9v+eUqAotIPCfp6AgKirlhbfmnInoh6rmiJHlrbjnv5Log73lipsqKiDigJQg6LaK55So6LaK6IGw5piO77yM5oyB57qM5YSq5YyW6L6o6K2J5rqW56K65bqmCi0g8J+UhCAqKuaZuuiDveW+qeiouuezu+e1sSoqIOKAlCDoh6rli5Xoqr/lj5bmrbflj7LntIDpjITvvIzov73ouaTlgaXlurfororljJbou4zot6EKLSDwn6WXICoq6aOf5p2Q6JmV5pa55YyWKiog4oCUIOS+nei+qOitiee1kOaenOaPkOS+m+WwjeaHiemjn+adkOiqv+eQhuW7uuitsAotIPCfjL8gKirlgaXlurfnlJ/mtLvljJYqKiDigJQg5bCH5Lit6Yar6aSK55Sf6J6N5YWl5pel5bi455Sf5rS7Ci0g8J+RpCAqKuWAi+mrlOeUn+aFi+euoeWutioqIOKAlCDov73ouaTlgIvkurrlgaXlurfni4DmhYvvvIzmiZPpgKDlsIjlsazppIrnlJ/mlrnmoYgKCi0tLQoKIyMg8J+OqCDlrqLoo73ljJboqK3lrpoKCmBpbmRleF9wdWJsaWMuaHRtbGAg6ZaL6aCt5pyJ5Y+v6Ieq6KiC6Kit5a6a5Y2A77yM5L+u5pS55Lul5LiL6K6K5pW45Y2z5Y+v77yaCgpgYGBqcwpjb25zdCBDVVNUT00gPSB7CiAgICBCUkFORF9DTjogJ+aZuuaFp+S4reWMuycsCiAgICBCUkFORF9FTjogJ0FJVENNJywKICAgIEJSQU5EX1RBR0xJTkU6ICdmb3IgdGhlIFdvcmxkJywKICAgIEJSQU5EX1NVQlRJVExFOiAn5oOg5Y+K5YWo55CDJywKICAgIExPR09fQ09MT1JfUFJJTUFSWTogJyM0QTZCNUEnLAogICAgTE9HT19DT0xPUl9BQ0NFTlQ6ICcjN0ZDRENEJywKICAgIFdFTENPTUVfTUVTU0FHRTogJ+aCqOWlve+8jOaIkeaYr+aZuuaFp+S4remGqy4uLicKfTsKYGBgCgotLS0KCiMjIPCfk4Qg5YWN6LKs6IGy5piOCgrkvb/nlKjmnKzns7vntbHliY3vvIzoq4vli5nlv4XplrHoroDkuKblkIzmhI8gW+WFjeiyrOiBsuaYjl0oaHR0cHM6Ly9haXRjbS5jcG9sYXIuaW8vZGlzY2xhaW1lcl9wdWJsaWMuaHRtbCnjgIIKCi0tLQoKIyMg8J+nkeKAjfCfkrsg5L2c6ICF6IiH5o6I5qyKCgotICoq5ZOB54mMKirvvJpBSVRDTQotICoq5o6I5qyKKirvvJpNSVQgTGljZW5zZQoKLS0tCgojIyDwn4yfIOiyoueNuwoK5q2h6L+OIElzc3VlIOiIhyBQdWxsIFJlcXVlc3TvvIHlpoLmnInku7vkvZXllY/poYzvvIzoq4vpgI/pgY4gW1RlbGVncmFtXShodHRwczovL3QubWUvYWl0Y21fY29tKSDoga/ntaHjgIIK
+# 🍃 AITCM · 智慧中醫 惠及全球
+
+> AITCM（Artificial Intelligence Traditional Chinese Medicine）— 基於大數據與名醫智慧的 AI 中醫辨證論治系統。
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+---
+
+## 📋 專案說明
+
+本 Repo 為 AITCM 系統的 **全球公開版前端**，任何人都可以：
+
+- ✅ 直接訪問 [https://aitcm.cpolar.io](https://aitcm.cpolar.io) 使用
+- ✅ Fork 後修改前端樣式或品牌名稱
+- ✅ 部署自己的版本
+
+> ⚠️ 本 Repo **僅包含前端原始碼**（HTML + CSS + JavaScript），後端服務未公開。
+
+---
+
+## 🚀 快速開始
+
+### 直接使用
+
+無需安裝任何東西，打開瀏覽器即可：
+
+```
+https://aitcm.cpolar.io
+```
+
+### 自行部署
+
+1. **Fork 本 Repo**
+2. 修改 `index_public.html` 開頭的 `API_BASE` 指向你自己的後端伺服器
+3. 部署到你的網頁伺服器（GitHub Pages、Vercel、Nginx 等皆可）
+
+---
+
+## 🛠️ 功能與特色
+
+### ⚡️ AITCM 智慧中醫
+
+> **大數據經典 × 名醫智慧集成**
+
+- 🗣️ **AI 中醫辨證對話** — 輸入症狀，AI 即時提供辨證論治建議
+- 📧 **郵箱驗證登入** — 發送驗證碼至郵箱，5 分鐘內快速驗證
+- 📝 **留言交流** — 匿名留言板，使用者交流養生心得
+- 🌐 **中英雙語支援** — 介面完整支援中英文切換
+- 📱 **全面移動端適配** — 手機、平板、桌面皆可流暢使用
+- 🧠 **具有自我學習能力** — 越用越聰明，持續優化辨證準確度
+- 🔄 **智能復診系統** — 自動調取歷史紀錄，追蹤健康變化軌跡
+- 🥗 **食材處方化** — 依辨證結果提供對應食材調理建議
+- 🌿 **健康生活化** — 將中醫養生融入日常生活
+- 👤 **個體生態管家** — 追蹤個人健康狀態，打造專屬養生方案
+
+---
+
+## 🎨 客製化設定
+
+`index_public.html` 開頭有可自訂設定區，修改以下變數即可：
+
+```js
+const CUSTOM = {
+    BRAND_CN: '智慧中医',
+    BRAND_EN: 'AITCM',
+    BRAND_TAGLINE: 'for the World',
+    BRAND_SUBTITLE: '惠及全球',
+    LOGO_COLOR_PRIMARY: '#4A6B5A',
+    LOGO_COLOR_ACCENT: '#7FCDCD',
+    WELCOME_MESSAGE: '您好，我是智慧中醫...'
+};
+```
+
+---
+
+## 📄 免責聲明
+
+使用本系統前，請務必閱讀並同意 [免責聲明](https://aitcm.cpolar.io/disclaimer_public.html)。
+
+---
+
+## 🧑‍💻 作者與授權
+
+- **品牌**：AITCM
+- **授權**：MIT License
+
+---
+
+## 🌟 貢獻
+
+歡迎 Issue 與 Pull Request！如有任何問題，請透過 [Telegram](https://t.me/aitcm_com) 聯絡。
