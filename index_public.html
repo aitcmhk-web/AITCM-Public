@@ -1200,19 +1200,19 @@
       if (thinkingElem) thinkingElem.remove();
       if (!response.ok) {
         const errText = await response.text();
-        throw new Error(`Dify API 错误 (${response.status}): ${errText}`);
+        throw new Error(`API 错误 (${response.status}): ${errText}`);
       }
       const data = await response.json();
       if (data.conversation_id) conversationId = data.conversation_id;
       const answer = data.answer || '（无回复内容）';
       appendMessage('ai', answer);
-      // 邮件已移至 Dify 工作流，前端不再触发
+      // 邮件已移至工作流，前端不再触发
 
     } catch (error) {
       const thinkingElem = document.getElementById(thinkingId);
       if (thinkingElem) thinkingElem.remove();
       console.error('API 调用失败:', error);
-      appendMessage('ai', `⚠️ 连线失败：${error.message}。请检查网络或 Dify 服务状态。`, true);
+      appendMessage('ai', `⚠️ 连线失败。请检查网络或服务状态。`, true);
     } finally {
       isProcessing = false;
       userInput.disabled = false;
