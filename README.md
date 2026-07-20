@@ -14,7 +14,15 @@
 - ✅ Fork 後修改前端樣式或品牌名稱
 - ✅ 部署自己的版本
 
-> ⚠️ 本 Repo **僅包含前端原始碼**（HTML + CSS + JavaScript），後端服務未公開。
+> ⚠️ 本 Repo **僅包含前端原始碼**
+
+---
+
+## 📸 畫面展示
+
+![AITCM 智慧中醫界面](screenshot.jpg)
+
+*AITCM 智慧中醫 - AI 辨證對話、留言交流、快捷連結完整界面*（HTML + CSS + JavaScript），後端服務未公開。
 
 ---
 
